@@ -1,0 +1,35 @@
+Julian Przybysz
+
+begin -> program() end
+
+program() -> statement() program()
+
+statement() -> ID assign_stmt()
+statement() -> ID con_stmt()
+statement() -> con_stmt()
+
+assign_stmt() -> ASSIGN voltagesource OPEN_PAR value() CLOSE_PAR
+assign_stmt() -> ASSIGN currentsource OPEN_PAR value() CLOSE_PAR
+assign_stmt() -> ASSIGN voltagesource OPEN_PAR CLOSE_PAR
+assign_stmt() -> ASSIGN currentsource OPEN_PAR CLOSE_PAR
+assign_stmt() -> ASSIGN voltageprobe OPEN_PAR CLOSE_PAR
+assign_stmt() -> ASSIGN currentprobe OPEN_PAR CLOSE_PAR
+assign_stmt() -> ASSIGN capacitor OPEN_PAR NUMBER CLOSE_PAR
+assign_stmt() -> ASSIGN resistor OPEN_PAR NUMBER CLOSE_PAR
+assign_stmt() -> ASSIGN inductor OPEN_PAR NUMBER CLOSE_PAR
+assign_stmt() -> ASSIGN diode OPEN PAR diode() CLOSE PAR
+
+
+value() -> NUMBER
+
+diode() -> ID ASSIGN value() COMMA diode() CLOSE_PAR
+
+con_stmt() -> gnd con_loop()
+con_stmt() -> OPEN_IDX digit() CLOSE_IDX con_loop()
+
+con_loop() -> CON ID OPEN_IDX digit() CLOSE_IDX 
+con_loop() -> CON ID OPEN_IDX digit() CLOSE_IDX con_loop()
+con_loop() -> CON gnd
+con_loop() -> CON gnd con_loop()
+
+digit() -> NUMBER

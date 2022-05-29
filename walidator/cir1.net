@@ -1,0 +1,28 @@
+begin # opis obwodu zawsze zawarty jest pomiędzy słowami kluczowymi begin ... end
+  v = voltagesource(1.0) # voltagesource z argumentem oznacza stałą wartość napięcia
+  u = voltagesource() # voltagesource bez argumentu oznacza źródło o napięciu ustalanym w trakcie analizy obwodu
+  r = resistor(1400) # rezystor wymaga podania wartości swojej rezystancji
+  # sekcja definicji elementów obwodu musi kończyć się co najmniej jedną pustą linią (bez komentarza)
+  # wcięcia są nieistotne
+  c = capacitor(5e-12) # kondensator wymaga podania wartości swojej pojemności
+  l = inductor(0.000001) # cewka wymaga podania wartości swojej indukcyjności
+
+  u[2] -- r[1] # ta linia oznacza, że złącze nr 2 źródła napięcia u jest połączone ze złączem nr 1 rezystora r 
+  r[2] -- l[1]
+  l[2] -- c[1]
+  c[2] -- v[1]
+  v[2] -- u[1] -- gnd # ta linia oznacza, że złącze nr 2 źródła napięcia v jest połączone ze złączem nr 1 źródła napięcia u oraz z uziemieniem gnd
+end
+begin 
+v = voltagesource(1.0) 
+u = voltagesource() 
+r = resistor(1400) 
+c = capacitor(5e-12) 
+l = inductor(0.000001) 
+
+u[2] -- r[1]
+r[2] -- l[1]
+l[2] -- c[1]
+c[2] -- v[1]
+v[2] -- u[1] -- gnd 
+end
